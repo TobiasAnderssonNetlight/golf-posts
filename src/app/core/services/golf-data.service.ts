@@ -11,7 +11,7 @@ export class GolfPostsService {
         1
     )
 
-    private pageSize = 2
+    private pageSize = 10
     constructor(private http: HttpClient) {}
 
     getGolfPosts(after?: string, before?: string): Observable<any>  {

@@ -34,7 +34,7 @@ export class GolfPostsComponent implements OnInit  {
     public getRepos(after?: string, before?: string) {
         this.golfPostsService.getGolfPosts(after, before).subscribe(
             (golfPostResponse: any) => {
-                this.golfPosts = golfPostResponse.data.children
+                this.golfPosts = golfPostResponse.data.children.filter(({ data }: { data: any }) => !data.stickied)
                 this.after = golfPostResponse.data.after
                 this.before = golfPostResponse.data.before
             }
