@@ -28,10 +28,11 @@ export class GolfPostsComponent implements OnInit  {
         this.golfPostsService.getCurrentPage().pipe(
             takeUntil(this.unsubscribe$)
         ).subscribe(page => this.currentPage = page)
-        this.getRepos()
+        this.getGolfPosts()
     }
 
-    public getRepos(after?: string, before?: string) {
+    public getGolfPosts(after?: string, before?: string) {
+        this.loading = true
         this.golfPostsService.getGolfPosts(after, before).subscribe(
             (golfPostResponse: any) => {
                 // Not sure what to do with the "stickied" posts, so just filtering them out for now
@@ -40,18 +41,19 @@ export class GolfPostsComponent implements OnInit  {
                 )
                 this.after = golfPostResponse.data.after
                 this.before = golfPostResponse.data.before
+                this.loading = false
             }
         )
     }
 
     public goToNextPage() {
         this.golfPostsService.setCurrentPage(this.currentPage + 1)
-        this.getRepos(this.after)
+        this.getGolfPosts(this.after)
     }
 
     public goToPreviousPage() {
         this.golfPostsService.setCurrentPage(this.currentPage - 1)
-        this.getRepos(undefined, this.before)
+        this.getGolfPosts(undefined, this.before)
     }
 
     ngOnDestroy() {

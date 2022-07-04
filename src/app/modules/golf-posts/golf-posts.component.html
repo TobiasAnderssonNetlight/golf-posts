@@ -5,13 +5,18 @@
   <div class="pagination-buttons">
     <button
       class="icon-button"
-      [disabled]="2 > currentPage"
+      [disabled]="2 > currentPage || loading"
+      [ngClass]="{ 'button-disabled': loading || 2 > currentPage }"
       (click)="goToPreviousPage()">
       <img src="assets/icons/chvr_prev.svg" />
     </button>
     <!-- Api does not return any full count of number of posts/pages, so just showing * for now -->
     <span class="pagination-counter">{{ currentPage }}/ *</span>
-    <button class="icon-button" (click)="goToNextPage()">
+    <button
+      [disabled]="!after || loading"
+      class="icon-button"
+      [ngClass]="{ 'button-disabled': loading || !after }"
+      (click)="goToNextPage()">
       <img class="icon-button" src="assets/icons/chvr_next.svg" />
     </button>
   </div>
