@@ -48,7 +48,6 @@ export class GolfPostsComponent implements OnInit  {
 
     public goToPreviousPage() {
         this.golfPostsService.setCurrentPage(this.currentPage - 1)
-        console.log(this.before)
         this.getRepos(undefined, this.before)
     }
 
