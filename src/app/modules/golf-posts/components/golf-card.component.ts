@@ -35,7 +35,7 @@ export class GolfCardComponent  {
         this.golfPost?.data?.title
     }
 
-    isImage(url: string) {
+    isImage(url: string): boolean {
       return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
     }
 

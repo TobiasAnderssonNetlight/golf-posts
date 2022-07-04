@@ -31,7 +31,7 @@ export class GolfPostsComponent implements OnInit  {
         this.getGolfPosts()
     }
 
-    public getGolfPosts(after?: string, before?: string) {
+    public getGolfPosts(after?: string, before?: string): void {
         this.loading = true
         this.golfPostsService.getGolfPosts(this.currentPage, after, before).subscribe(
             (golfPostResponse: any) => {
@@ -46,17 +46,17 @@ export class GolfPostsComponent implements OnInit  {
         )
     }
 
-    public goToNextPage() {
+    public goToNextPage(): void {
         this.golfPostsService.setCurrentPage(this.currentPage + 1)
         this.getGolfPosts(this.after)
     }
 
-    public goToPreviousPage() {
+    public goToPreviousPage(): void {
         this.golfPostsService.setCurrentPage(this.currentPage - 1)
         this.getGolfPosts(undefined, this.before)
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.unsubscribe$.next(true);
         this.unsubscribe$.complete();
     }
