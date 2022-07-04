@@ -14,10 +14,10 @@ export class GolfPostsService {
     private pageSize = 10
     constructor(private http: HttpClient) {}
 
-    getGolfPosts(after?: string, before?: string): Observable<any>  {
+    getGolfPosts(currentPage: number, after?: string, before?: string): Observable<any>  {
         const params = { 
             limit: this.pageSize,
-            count: this.pageSize,
+            count: this.pageSize * currentPage,
             ...(after && { after }),
             ...(before && { before }) 
         }

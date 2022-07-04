@@ -33,7 +33,7 @@ export class GolfPostsComponent implements OnInit  {
 
     public getGolfPosts(after?: string, before?: string) {
         this.loading = true
-        this.golfPostsService.getGolfPosts(after, before).subscribe(
+        this.golfPostsService.getGolfPosts(this.currentPage, after, before).subscribe(
             (golfPostResponse: any) => {
                 // Not sure what to do with the "stickied" posts, so just filtering them out for now
                 this.golfPosts = golfPostResponse.data.children.filter(
