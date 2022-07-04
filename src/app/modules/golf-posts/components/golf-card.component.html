@@ -1,0 +1,48 @@
+<mat-card class="card">
+  <div class="card-wrapper">
+    <img
+      *ngIf="isImage(golfPost?.data?.url) && state === 'collapsed'"
+      [src]="golfPost?.data?.url"
+      class="image-thumbnail" />
+    <div class="card-content">
+      <mat-card-header class="card-header">
+        <div class="comment-section-container">
+          <img src="assets/icons/comment.svg" />
+          {{ golfPost?.data?.num_comments }}
+          <img src="assets/icons/updutt.svg" />
+          {{ golfPost?.data?.score }}
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="preview-text" *ngIf="state === 'collapsed'">
+          {{ getPostText() }}
+        </p>
+        <div [@bodyExpansion]="state" class="expandable-content">
+          <h1 class="title-text">{{ golfPost?.data?.title }}</h1>
+          <p>
+            {{ getPostText() }}
+          </p>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="card-footer">
+        <span class="date-author-text"
+          >posted {{ golfPost?.data?.created | durationSince }} by
+          {{ golfPost?.data?.author }}</span
+        >
+        <!-- Could probably be improved to not have the "Show more" in cases of little text -->
+        <div class="show-more-button" (click)="toggle()">
+          <span>{{ state === 'collapsed' ? 'Show more' : 'Show less' }}</span>
+          <button class="icon-button">
+            <img
+              [src]="
+                state === 'collapsed'
+                  ? 'assets/icons/chvr_1.svg'
+                  : 'assets/icons/chvr_2.svg'
+              " />
+          </button>
+        </div>
+      </mat-card-actions>
+    </div>
+  </div>
+</mat-card>
